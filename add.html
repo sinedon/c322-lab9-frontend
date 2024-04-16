@@ -24,6 +24,7 @@
       <button onclick="addTheDuck()">Add the duck</button>
     </div>
     <script src="configuration.js"></script>
+    <script src="tokenchecker.js"></script>
     <script>
       let host = getHost();
           async function addTheDuck() {
@@ -39,12 +40,21 @@
                 //alert("You entered: id=" + duck.id + " ,type=" + duck.type);
 
                 console.log("You entered:" + JSON.stringify(duck));
+                
+                let token = configuration.token();
+
+                // Check if the token is valid
+                let tokenCheckResult = checkToken(token);
+                if (!tokenCheckResult.valid) {
+                    console.log('Token is invalid:', tokenCheckResult.message);
+                    return;
+                }
 
                 let request = {
                   method: "POST",
                   headers: {
                       "Content-Type": "application/json",
-                      'Authorization': 'Bearer ${configuration.token()}'
+                      "Authorization": "Bearer ${configuration.token()}"
                   },
                   body: JSON.stringify(duck)
                 };

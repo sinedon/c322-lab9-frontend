@@ -1,6 +1,6 @@
 const mode = 0;
 
-const host_local = 'http://localhost:8080';
+const host_local = "http://localhost:8080";
 const host_remote = "https://ducks-service-???.onrender.com";
 
 function getHost() {
@@ -8,7 +8,7 @@ function getHost() {
 }
 
 function isLoggedIn() {
-    if(localStorage.getItem('token')) {
+    if(localStorage.getItem("token")) {
         return true;
     }  else {
         return false;
@@ -16,23 +16,23 @@ function isLoggedIn() {
 }
 
 function getTheToken() {
-    return localStorage.getItem('token');
+    return localStorage.getItem("token");
 }
 
 function saveTheToken(token) {
-    localStorage.setItem('token', token);
+    localStorage.setItem("token", token);
     updateTheNavigationBar();
 }
 
 function removeTheToken() {
-    localStorage.removeItem('token');
+    localStorage.removeItem("token");
     updateTheNavigationBar();
 }
 
 let configuration = {
     isLoggedIn: () => isLoggedIn(),
     host: () => getHost(),
-    token: () => getTheToken(),
+    token: () => getTheToken()
 }
 
 updateTheNavigationBar();
@@ -78,8 +78,8 @@ async function login() {
         removeTheToken();
         alert("Something went wrong!");
     }
+}
 
-    async function logout() {
-        removeTheToken();
-    }
+async function logout() {
+    removeTheToken();
 }
