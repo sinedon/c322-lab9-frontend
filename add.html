@@ -89,11 +89,11 @@
                 let request = {
                   method: "POST",
                   headers: {
-                      "Content-Type": "application/json",
                       "Authorization": `Bearer ${configuration.token()}`
                   },
                   body: formData
                 };
+                console.log("Request:", request);
                 let response = await fetch(host + "/ducks/" + duckId + "/image", request);
                 let result = await response.json();
                 return result;
