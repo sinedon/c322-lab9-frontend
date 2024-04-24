@@ -50,11 +50,13 @@
                     return;
                 }
 
+                console.log("Token: " + token);
+
                 let request = {
                   method: "POST",
                   headers: {
                       "Content-Type": "application/json",
-                      "Authorization": "Bearer ${configuration.token()}"
+                      "Authorization": `Bearer ${configuration.token()}`
                   },
                   body: JSON.stringify(duck)
                 };
@@ -79,11 +81,17 @@
           }
 
           async function submitTheImage(duckId) {               
-                let imageInput = document.getElementById("imageInput");            
+                let imageInput = document.getElementById("imageInput");    
+                console.log("Image input:", imageInput.files[0]);        
                 let formData = new FormData();
                 formData.append("file", imageInput.files[0]);
+                console.log("JSON data:", JSON.stringify(Object.fromEntries(formData)));
                 let request = {
                   method: "POST",
+                  headers: {
+                      "Content-Type": "application/json",
+                      "Authorization": `Bearer ${configuration.token()}`
+                  },
                   body: formData
                 };
                 let response = await fetch(host + "/ducks/" + duckId + "/image", request);
